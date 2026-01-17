@@ -2,8 +2,6 @@
 
 // answer: num is the superclass of numeric types and can store both int and double values, whereas double is used specifically for decimal numbers.
 
-// another answer: a double variable can accept an int value because Dart automatically converts it to a double. However, num is more flexible since it can hold both int and `double values.
-
 // Example:
 
 void main() {
