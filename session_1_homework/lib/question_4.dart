@@ -2,5 +2,5 @@
 only hold integer values? Write the code. */
 
 void main() {
-  // int personAge;
+  int personAge;
 }
