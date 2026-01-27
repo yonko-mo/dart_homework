@@ -22,4 +22,15 @@ void main() {
       print('the sum is smaller than 40');
     }
   }
+  
+  // another solution
+
+  // List<int>? scores = null;
+  // if (scores != null && scores.isNotEmpty) {
+  //   int sum = scores.first + scores.last;
+  //   print(sum);
+  //   print(sum >= 40);
+  // } else {
+  //   print('No Scores');
+  // }
 }
