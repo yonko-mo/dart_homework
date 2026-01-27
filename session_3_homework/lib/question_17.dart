@@ -10,7 +10,7 @@ toString, padLeft, and length to format and compare the results.
 */
 void main() {
   double price = 30.5;
-  String priceTag = '\$' + price.toString().padLeft(5, '');
+  String priceTag = price.toString().padLeft(5, '\$');
   print("Price tag: $priceTag");
   if (priceTag.length > price.toString().length) {
     print('The formatted price tag is longer');
