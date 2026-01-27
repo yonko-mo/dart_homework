@@ -12,4 +12,10 @@ void main() {
   } else {
     print("no duplicates found");
   }
+
+  // Eng Tharwat Solution
+  // var names = ["ali", "ahmed", "mohamed", "ali"];
+
+  // var uniqueNames = names.toSet();
+  // print(names.length != uniqueNames.length);
 }
