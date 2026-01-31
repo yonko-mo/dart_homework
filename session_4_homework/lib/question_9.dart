@@ -5,11 +5,5 @@ value, print 404.
 */
 void main() {
   String pagePath = '';
-  switch (pagePath) {
-    case '/':
-      print('Home');
-      break;
-    default:
-      print('404');
-  }
+  print(pagePath == '/' ? 'Home' : '404');
 }
