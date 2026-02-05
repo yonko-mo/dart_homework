@@ -12,20 +12,39 @@ import 'dart:io';
 // 52 / 10 = 5.2 --> 5
 // 5 % 10 = 5
 // 5 / 10
+// void main() {
+//   stdout.write('please enter a number: ');
+//   int number = int.parse(stdin.readLineSync()!);
+//   int digitsSum = 0;
+//   int digit = number % 10;
+//   int largestDigit = digit;
+//   while (number != 0) {
+//     digit = number % 10;
+//     digitsSum += digit;
+//     if (digit > largestDigit) {
+//       largestDigit = digit;
+//     }
+//     number ~/= 10;
+//   }
+//   print('Sum of digits: $digitsSum');
+//   print('Largest digit: $largestDigit');
+// }
+
+// another solution from eng tharwat
+
 void main() {
-  stdout.write('please enter a number: ');
+  stdout.write('please enter number: ');
   int number = int.parse(stdin.readLineSync()!);
-  int digitsSum = 0;
-  int digit = number % 10;
-  int largestDigit = digit;
-  while (number != 0) {
-    digit = number % 10;
-    digitsSum += digit;
-    if (digit > largestDigit) {
-      largestDigit = digit;
+  List<String> numbers = number.toString().split('');
+  int sum = 0;
+  int largestDigit = 0;
+  for (var num in numbers) {
+    var number = int.parse(num);
+    if (number > largestDigit) {
+      largestDigit = number;
     }
-    number ~/= 10;
+    sum += int.parse(num);
   }
-  print('Sum of digits: $digitsSum');
-  print('Largest digit: $largestDigit');
+  print("Sum: $sum");
+  print('Largest Number: $largestDigit');
 }
