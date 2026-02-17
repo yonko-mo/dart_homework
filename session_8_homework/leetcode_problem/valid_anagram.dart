@@ -69,8 +69,8 @@ bool isAnagram(String s, String t) {
   for (var i = 0; i < s.length; i++) {
     String sChar = s[i];
     String tChar = t[i];
-    sMapCount[sChar] = sMapCount[sChar] ?? 0 + 1;
-    tMapCount[tChar] = tMapCount[tChar] ?? 0 + 1;
+    sMapCount[sChar] = (sMapCount[sChar] ?? 0) + 1;
+    tMapCount[tChar] = (tMapCount[tChar] ?? 0) + 1;
   }
   for (var i = 0; i < t.length; i++) {
     String tChar = t[i];
