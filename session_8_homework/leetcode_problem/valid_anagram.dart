@@ -29,28 +29,52 @@ void main() {
   print(isAnagram(s, t));
 }
 
+// my solution
+
+// bool isAnagram(String s, String t) {
+//   if (s.length != t.length) {
+//     return false;
+//   }
+//   Map<String, int> sCounts = {};
+//   Map<String, int> tCounts = {};
+//   for (var element in s.split('')) {
+//     if (!sCounts.containsKey(element)) {
+//       sCounts[element] = 1;
+//     } else {
+//       sCounts[element] = sCounts[element]! + 1;
+//     }
+//   }
+//   for (var element in t.split('')) {
+//     if (!tCounts.containsKey(element)) {
+//       tCounts[element] = 1;
+//     } else {
+//       tCounts[element] = tCounts[element]! + 1;
+//     }
+//   }
+//   for (var element in sCounts.entries) {
+//     if (tCounts[element.key] != element.value) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+// eng tharwat solution
 bool isAnagram(String s, String t) {
   if (s.length != t.length) {
     return false;
   }
-  Map<String, int> sCounts = {};
-  Map<String, int> tCounts = {};
-  for (var element in s.split('')) {
-    if (!sCounts.containsKey(element)) {
-      sCounts[element] = 1;
-    } else {
-      sCounts[element] = sCounts[element]! + 1;
-    }
+  Map<String, int> sMapCount = {};
+  Map<String, int> tMapCount = {};
+  for (var i = 0; i < s.length; i++) {
+    String sChar = s[i];
+    String tChar = t[i];
+    sMapCount[sChar] = sMapCount[sChar] ?? 0 + 1;
+    tMapCount[tChar] = tMapCount[tChar] ?? 0 + 1;
   }
-  for (var element in t.split('')) {
-    if (!tCounts.containsKey(element)) {
-      tCounts[element] = 1;
-    } else {
-      tCounts[element] = tCounts[element]! + 1;
-    }
-  }
-  for (var element in sCounts.entries) {
-    if (tCounts[element.key] != element.value) {
+  for (var i = 0; i < t.length; i++) {
+    String tChar = t[i];
+    if (sMapCount[tChar] != tMapCount[tChar]) {
       return false;
     }
   }
