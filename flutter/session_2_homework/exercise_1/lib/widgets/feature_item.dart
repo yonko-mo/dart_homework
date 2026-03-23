@@ -31,15 +31,15 @@ class FeatureItem extends StatelessWidget {
           ),
           child: Icon(icon, color: iconColor),
         ),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(
           subTitle,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xffa7a7a7),
             fontWeight: FontWeight.w400,
           ),
         ),
-        trailing: Icon(
+        trailing: const Icon(
           Icons.arrow_forward_ios_sharp,
           size: 20,
           color: Color(0xffc0c0c0),

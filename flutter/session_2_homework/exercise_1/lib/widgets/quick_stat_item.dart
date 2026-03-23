@@ -16,11 +16,11 @@ class QuickStatItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(11),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color(0xffd6d3d6),
             spreadRadius: 1,
@@ -37,11 +37,11 @@ class QuickStatItem extends StatelessWidget {
           Icon(icon, size: 32, color: iconColor),
           Text(
             value,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Text(
             statName,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xffc9c9c9),
               fontSize: 16,
               fontWeight: FontWeight.w500,

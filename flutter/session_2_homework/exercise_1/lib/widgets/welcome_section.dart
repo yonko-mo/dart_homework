@@ -7,16 +7,16 @@ class WelcomeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xff8160b9),
+        color: const Color(0xff8160b9),
         borderRadius: BorderRadius.circular(18),
       ),
       width: MediaQuery.sizeOf(context).width * 0.9,
 
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Hello! 👋',
             style: TextStyle(
               color: Color(0xfffefbfe),
@@ -24,8 +24,8 @@ class WelcomeSection extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             'Try your best to build this ui',
             style: TextStyle(
               color: Color(0xffefddfe),
@@ -33,16 +33,16 @@ class WelcomeSection extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Container(
             width: double.infinity,
             height: 50,
             decoration: BoxDecoration(
-              color: Color(0xff673ab7),
+              color: const Color(0xff673ab7),
               borderRadius: BorderRadius.circular(18),
             ),
 
-            child: Center(
+            child: const Center(
               child: Text(
                 'Get Started',
                 style: TextStyle(
