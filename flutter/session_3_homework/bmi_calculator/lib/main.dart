@@ -10,9 +10,12 @@ class BmiCalculatorApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xff04061d),
+      ),
       debugShowCheckedModeBanner: false,
-      home: BmiCalculatorPage(),
+      home:  BmiCalculatorPage(),
     );
   }
 }

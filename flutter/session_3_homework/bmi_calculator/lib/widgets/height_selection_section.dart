@@ -1,24 +1,20 @@
+import 'package:bmi_calculator/widgets/custom_background_container.dart';
 import 'package:flutter/material.dart';
 
-class HeightSection extends StatelessWidget {
-  final double height;
-  final void Function(double) onHeightChanged;
+class HeightSelectionSection extends StatefulWidget {
+  const HeightSelectionSection({super.key});
 
-  const HeightSection({
-    super.key,
-    required this.height,
-    required this.onHeightChanged,
-  });
+  @override
+  State<HeightSelectionSection> createState() => _HeightSelectionSectionState();
+}
+
+class _HeightSelectionSectionState extends State<HeightSelectionSection> {
+  double _height = 174;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return CustomBackgroundContainer(
       width: double.infinity,
-      height: 170,
-      decoration: BoxDecoration(
-        color: const Color(0xff1d1e33),
-        borderRadius: BorderRadius.circular(10),
-      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -32,10 +28,10 @@ class HeightSection extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                '${height.round()}',
+                _height.round().toString(),
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 40,
+                  fontSize: 60,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -47,8 +43,8 @@ class HeightSection extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           SliderTheme(
-            data: SliderTheme.of(context).copyWith(
-              trackHeight: 3, // سمك الخط
+            data: SliderThemeData(
+              trackHeight: 1, // سمك الخط
               activeTrackColor: Colors.white,
               inactiveTrackColor: const Color(0xff8d8e98),
               overlayShape: SliderComponentShape.noOverlay,
@@ -58,10 +54,13 @@ class HeightSection extends StatelessWidget {
               ),
             ),
             child: Slider(
-              value: height,
+              value: _height,
               min: 100,
               max: 220,
-              onChanged: onHeightChanged,
+              onChanged: (value) {
+                _height = value;
+                setState(() {});
+              },
             ),
           ),
         ],

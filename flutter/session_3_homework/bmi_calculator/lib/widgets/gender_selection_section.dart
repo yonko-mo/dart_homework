@@ -1,37 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/models/gender_enum.dart';
 import 'gender_item.dart';
 
-class GenderSelectionSection extends StatelessWidget {
-  final Gender gender;
-  final ValueChanged<Gender> onGenderChanged;
+class GenderSelectionSection extends StatefulWidget {
+  const GenderSelectionSection({super.key});
 
-  const GenderSelectionSection({
-    super.key,
-    required this.gender,
-    required this.onGenderChanged,
-  });
+  @override
+  State<GenderSelectionSection> createState() => _GenderSelectionSectionState();
+}
 
+class _GenderSelectionSectionState extends State<GenderSelectionSection> {
+  final Color _selectedColor = const Color(0xff090b24);
+  final Color _unselectedColor = const Color(0xff17172f);
+
+  bool _isMaleSelected = true;
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Expanded(
           child: GenderItem(
-            onPressed: () => onGenderChanged(Gender.male),
-            label: 'MALE',
+            onTap: () {
+              setState(() {
+                _isMaleSelected = true;
+              });
+            },
+            color: _isMaleSelected ? _selectedColor : _unselectedColor,
             icon: Icons.male,
-            isSelected: gender == Gender.male,
+            label: 'MALE',
           ),
         ),
         const SizedBox(width: 30),
         Expanded(
           child: GenderItem(
-            onPressed: () => onGenderChanged(Gender.female),
-            label: 'FEMALE',
+            onTap: () {
+              setState(() {
+                _isMaleSelected = false;
+              });
+            },
+            color: !_isMaleSelected ? _selectedColor : _unselectedColor,
             icon: Icons.female,
-            isSelected: gender == Gender.female,
+            label: 'FEMALE',
           ),
         ),
       ],

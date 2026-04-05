@@ -1,8 +1,9 @@
+import 'package:bmi_calculator/widgets/custom_background_container.dart';
 import 'package:flutter/material.dart';
 import 'custom_circle_icon_button.dart';
 
-class CounterCard extends StatelessWidget {
-  const CounterCard({
+class ValueChangedItem extends StatelessWidget {
+  const ValueChangedItem({
     super.key,
     required this.label,
     required this.value,
@@ -17,12 +18,7 @@ class CounterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      decoration: BoxDecoration(
-        color: const Color(0xff1d1e33),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return CustomBackgroundContainer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -34,7 +30,7 @@ class CounterCard extends StatelessWidget {
             '${value.round()}',
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 60,
+              fontSize: 55,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -45,7 +41,7 @@ class CounterCard extends StatelessWidget {
                 icon: Icons.remove,
                 onPressed: onDecrement,
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               CustomCircleIconButton(icon: Icons.add, onPressed: onIncrement),
             ],
           ),

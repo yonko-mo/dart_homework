@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/models/gender_enum.dart';
 
 class BmiResultPage extends StatelessWidget {
   final double bmi;
@@ -7,7 +6,6 @@ class BmiResultPage extends StatelessWidget {
   final double height;
   final int weight;
   final int age;
-  final Gender gender;
 
   const BmiResultPage({
     super.key,
@@ -16,7 +14,6 @@ class BmiResultPage extends StatelessWidget {
     required this.height,
     required this.weight,
     required this.age,
-    required this.gender,
   });
 
   Color getStatusColor() {
@@ -95,8 +92,7 @@ class BmiResultPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  _buildDetailRow('Gender', gender.name.toUpperCase()),
-                  const SizedBox(height: 15),
+                 
                   _buildDetailRow('Height', '${height.round()} cm'),
                   const SizedBox(height: 15),
                   _buildDetailRow('Weight', '$weight kg'),

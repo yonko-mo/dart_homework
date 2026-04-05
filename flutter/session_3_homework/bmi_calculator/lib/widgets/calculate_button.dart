@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/models/gender_enum.dart';
 
-class CalculateSection extends StatelessWidget {
+class CalculateButton extends StatelessWidget {
   final double height;
   final int weight;
   final int age;
-  final Gender gender;
   final VoidCallback onCalculate;
 
-  const CalculateSection({
+  const CalculateButton({
     super.key,
     required this.height,
     required this.weight,
     required this.age,
-    required this.gender,
     required this.onCalculate,
   });
 
@@ -21,7 +18,7 @@ class CalculateSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 70,
+      height: 60,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xffec0d54),
