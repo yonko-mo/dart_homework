@@ -17,14 +17,11 @@ class TaskInputField extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.transparent,
         boxShadow: [
-          // الشادو الأساسي (لفوق)
           BoxShadow(
             blurRadius: 8.0,
             color: Colors.black.withValues(alpha: 0.06),
             offset: const Offset(0, -2),
           ),
-
-          // نمسح الجزء اللي تحت
           const BoxShadow(color: Colors.white, offset: Offset(0, 0)),
         ],
       ),
