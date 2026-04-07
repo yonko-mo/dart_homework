@@ -1,8 +1,10 @@
+import 'package:bmi_calculator/models/bmi_model.dart';
 import 'package:flutter/material.dart';
 import 'gender_item.dart';
 
 class GenderSelectionSection extends StatefulWidget {
-  const GenderSelectionSection({super.key});
+  final BmiModel bmiModel2;
+  const GenderSelectionSection({super.key, required this.bmiModel2});
 
   @override
   State<GenderSelectionSection> createState() => GenderSelectionSectionState();
@@ -12,13 +14,8 @@ class GenderSelectionSectionState extends State<GenderSelectionSection> {
   final Color _selectedColor = const Color(0xff090b24);
   final Color _unselectedColor = const Color(0xff17172f);
 
-  String _gender = 'Male';
-
-  String getGender() => _gender;
-
   @override
   Widget build(BuildContext context) {
-    final bool isMaleSelected = _gender == 'Male';
 
     return Row(
       children: [
@@ -26,10 +23,10 @@ class GenderSelectionSectionState extends State<GenderSelectionSection> {
           child: GenderItem(
             onTap: () {
               setState(() {
-                _gender = 'Male';
+                widget.bmiModel2.gender = Gender.male;
               });
             },
-            color: isMaleSelected ? _selectedColor : _unselectedColor,
+            color: widget.bmiModel2.gender == Gender.male ? _selectedColor : _unselectedColor,
             icon: Icons.male,
             label: 'MALE',
           ),
@@ -39,10 +36,10 @@ class GenderSelectionSectionState extends State<GenderSelectionSection> {
           child: GenderItem(
             onTap: () {
               setState(() {
-                _gender = 'Female';
+                widget.bmiModel2.gender = Gender.female;
               });
             },
-            color: !isMaleSelected ? _selectedColor : _unselectedColor,
+            color: widget.bmiModel2.gender == Gender.female ? _selectedColor : _unselectedColor,
             icon: Icons.female,
             label: 'FEMALE',
           ),
@@ -51,3 +48,5 @@ class GenderSelectionSectionState extends State<GenderSelectionSection> {
     );
   }
 }
+
+enum Gender { male, female, other }

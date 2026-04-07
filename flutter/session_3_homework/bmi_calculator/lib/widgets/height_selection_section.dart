@@ -1,17 +1,17 @@
+import 'package:bmi_calculator/models/bmi_model.dart';
 import 'package:bmi_calculator/widgets/custom_background_container.dart';
 import 'package:flutter/material.dart';
 
 class HeightSelectionSection extends StatefulWidget {
-  const HeightSelectionSection({super.key});
+  final BmiModel bmiModel2;
+  const HeightSelectionSection({super.key, required this.bmiModel2});
 
   @override
   State<HeightSelectionSection> createState() => HeightSelectionSectionState();
 }
 
 class HeightSelectionSectionState extends State<HeightSelectionSection> {
-  double _height = 174;
 
-  double getHeight() => _height;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class HeightSelectionSectionState extends State<HeightSelectionSection> {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                _height.round().toString(),
+                widget.bmiModel2.height.round().toString(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 60,
@@ -56,11 +56,11 @@ class HeightSelectionSectionState extends State<HeightSelectionSection> {
               ),
             ),
             child: Slider(
-              value: _height,
+              value: widget.bmiModel2.height,
               min: 100,
               max: 220,
               onChanged: (value) {
-                _height = value;
+                widget.bmiModel2.height = value;
                 setState(() {});
               },
             ),

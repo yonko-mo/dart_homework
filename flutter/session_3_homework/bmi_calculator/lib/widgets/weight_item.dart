@@ -1,31 +1,29 @@
+import 'package:bmi_calculator/models/bmi_model.dart';
 import 'package:bmi_calculator/widgets/value_changed_item.dart';
 import 'package:flutter/material.dart';
 
 class WeightItem extends StatefulWidget {
-  const WeightItem({super.key});
+  final BmiModel bmiModel2;
+  const WeightItem({super.key, required this.bmiModel2});
 
   @override
   State<WeightItem> createState() => WeightItemState();
 }
 
 class WeightItemState extends State<WeightItem> {
-  int _weight = 60;
-
-  int getWeight() => _weight;
-
   @override
   Widget build(BuildContext context) {
     return ValueChangedItem(
       label: 'WEIGHT',
-      value: _weight,
+      value: widget.bmiModel2.weight,
       onDecrement: () {
         setState(() {
-          _weight--;
+          widget.bmiModel2.weight--;
         });
       },
       onIncrement: () {
         setState(() {
-          _weight++;
+          widget.bmiModel2.weight++;
         });
       },
     );

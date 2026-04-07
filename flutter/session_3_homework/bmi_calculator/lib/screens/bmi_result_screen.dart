@@ -1,51 +1,33 @@
+import 'package:bmi_calculator/models/bmi_model.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/theme/bmi_colors.dart';
-import 'package:bmi_calculator/theme/bmi_dimensions.dart';
-import 'package:bmi_calculator/widgets/result_widgets/bmi_display_widget.dart';
-import 'package:bmi_calculator/widgets/result_widgets/status_text_widget.dart';
-import 'package:bmi_calculator/widgets/result_widgets/details_card_widget.dart';
-import 'package:bmi_calculator/widgets/result_widgets/back_button_widget.dart';
-import 'package:bmi_calculator/widgets/result_widgets/result_app_bar_widget.dart';
 
 class BmiResultScreen extends StatelessWidget {
-  final String gender;
-  final double bmi;
-  final String status;
-  final double height;
-  final int weight;
-  final int age;
+  final BmiModel bmiModel2;
 
-  const BmiResultScreen({
-    super.key,
-    required this.gender,
-    required this.bmi,
-    required this.status,
-    required this.height,
-    required this.weight,
-    required this.age,
-  });
+  const BmiResultScreen({super.key, required this.bmiModel2});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BmiColors.bgColor,
-      appBar: ResultAppBarWidget(onBackPressed: () => Navigator.pop(context)),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff04061d),
+        title: const Text(
+          'BMI CALCULATOR',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BmiDisplayWidget(bmi: bmi, status: status),
-            const SizedBox(height: BmiDimensions.mediumSpacing),
-            StatusTextWidget(status: status),
-            const SizedBox(height: BmiDimensions.sectionSpacing),
-            DetailsCardWidget(
-              gender: gender,
-              height: height,
-              weight: weight,
-              age: age,
+            Text(
+              'Your Bmi is ${bmiModel2.calculateBmi().toStringAsFixed(1)}',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: BmiDimensions.sectionSpacing),
-            BackButtonWidget(onPressed: () => Navigator.pop(context)),
           ],
         ),
       ),

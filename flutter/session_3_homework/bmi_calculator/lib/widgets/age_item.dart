@@ -1,31 +1,31 @@
+import 'package:bmi_calculator/models/bmi_model.dart';
 import 'package:bmi_calculator/widgets/value_changed_item.dart';
 import 'package:flutter/material.dart';
 
 class AgeItem extends StatefulWidget {
-  const AgeItem({super.key});
+  final BmiModel bmiModel2;
+  const AgeItem({super.key,required this.bmiModel2});
 
   @override
   State<AgeItem> createState() => AgeItemState();
 }
 
 class AgeItemState extends State<AgeItem> {
-  int _age = 29;
 
-  int getAge() => _age;
 
   @override
   Widget build(BuildContext context) {
     return ValueChangedItem(
       label: 'AGE',
-      value: _age,
+      value: widget.bmiModel2.age,
       onDecrement: () {
         setState(() {
-          _age--;
+          widget.bmiModel2.age--;
         });
       },
       onIncrement: () {
         setState(() {
-          _age++;
+          widget.bmiModel2.age++;
         });
       },
     );

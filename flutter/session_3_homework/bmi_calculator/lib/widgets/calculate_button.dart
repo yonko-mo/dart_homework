@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CalculateButton extends StatelessWidget {
-  final double height;
-  final int weight;
-  final int age;
-  final VoidCallback onCalculate;
+  final VoidCallback onPressed;
 
   const CalculateButton({
     super.key,
-    required this.height,
-    required this.weight,
-    required this.age,
-    required this.onCalculate,
+    required this.onPressed,
   });
 
   @override
@@ -26,7 +20,7 @@ class CalculateButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-        onPressed: onCalculate,
+        onPressed: onPressed,
         child: const Text(
           'CALCULATE',
           style: TextStyle(

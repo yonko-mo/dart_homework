@@ -1,27 +1,20 @@
-class BmiResult {
-  final double bmi;
-  final String status;
+import 'package:bmi_calculator/widgets/gender_selection_section.dart';
 
-  BmiResult({required this.bmi, required this.status});
-}
+class BmiModel {
+  Gender gender;
+  double height;
+  int weight;
+  int age;
 
-class BmiCalculator {
-  static BmiResult calculate({required double height, required int weight}) {
+  BmiModel({
+    required this.gender,
+    required this.height,
+    required this.weight,
+    required this.age,
+  });
+  double calculateBmi() {
     double heightInMeters = height / 100;
     double bmi = weight / (heightInMeters * heightInMeters);
-    String status = _getStatus(bmi);
-    return BmiResult(bmi: bmi, status: status);
-  }
-
-  static String _getStatus(double bmi) {
-    if (bmi < 18.5) {
-      return 'Underweight';
-    } else if (bmi >= 18.5 && bmi < 25) {
-      return 'Normal Weight';
-    } else if (bmi >= 25 && bmi < 30) {
-      return 'Overweight';
-    } else {
-      return 'Obese';
-    }
+    return bmi;
   }
 }
