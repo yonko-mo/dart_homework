@@ -13,7 +13,7 @@ class MyTasksView extends StatefulWidget {
 
 class _MyTasksViewState extends State<MyTasksView> {
   final TextEditingController controller = TextEditingController();
-  List<TaskModel> tasks = [];
+  final List<TaskModel> tasks = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
