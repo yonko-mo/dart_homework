@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_management_app/models/task_model.dart';
-import 'package:task_management_app/widgets/no_tasks_section.dart';
-import 'package:task_management_app/widgets/task_card.dart';
-import 'package:task_management_app/widgets/task_text_field.dart';
+import 'package:task_management_app/widgets/empty_tasks_widget.dart';
+import 'package:task_management_app/widgets/task_text_field_widget.dart';
+import 'package:task_management_app/widgets/tasks_list_view_widget.dart';
 
 class MyTasksView extends StatefulWidget {
   const MyTasksView({super.key});
@@ -12,8 +12,11 @@ class MyTasksView extends StatefulWidget {
 }
 
 class _MyTasksViewState extends State<MyTasksView> {
-  final TextEditingController controller = TextEditingController();
   final List<TaskModel> tasks = [];
+  void updateTasks() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,40 +31,10 @@ class _MyTasksViewState extends State<MyTasksView> {
         children: [
           Expanded(
             child: tasks.isEmpty
-                ? const Center(child: NoTasksSection())
-                : ListView.builder(
-                    itemCount: tasks.length,
-                    itemBuilder: (context, index) {
-                      final task = tasks[index];
-                      return TaskCard(
-                        task: task,
-                        onToggleComplete: () {
-                          setState(() {
-                            task.isCompleted = !task.isCompleted;
-                          });
-                        },
-                        onDelete: () {
-                          setState(() {
-                            tasks.removeAt(index);
-                          });
-                        },
-                      );
-                    },
-                  ),
+                ? const Center(child: EmptyTasksWidget())
+                : TasksListViewWidget(tasks: tasks, updateTasks: updateTasks),
           ),
-          TaskTextFieldWidget(
-            controller: controller,
-            onAddTask: () {
-              if (controller.text.trim().isEmpty) return;
-              setState(() {
-                tasks.add(
-                  TaskModel(title: controller.text, date: DateTime.now()),
-                );
-              });
-
-              controller.clear();
-            },
-          ),
+          TaskTextFieldWidget(tasks: tasks, updateTasks: updateTasks),
         ],
       ),
     );

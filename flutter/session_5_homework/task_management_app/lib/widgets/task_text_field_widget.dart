@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:task_management_app/models/task_model.dart';
 
-class TaskTextFieldWidget extends StatelessWidget {
-  final TextEditingController controller;
-  final VoidCallback onAddTask;
+class TaskTextFieldWidget extends StatefulWidget {
+  final List<TaskModel> tasks;
+  final void Function() updateTasks;
 
   const TaskTextFieldWidget({
     super.key,
-    required this.controller,
-    required this.onAddTask,
+    required this.tasks,
+    required this.updateTasks,
   });
+
+  @override
+  State<TaskTextFieldWidget> createState() => _TaskTextFieldWidgetState();
+}
+
+class _TaskTextFieldWidgetState extends State<TaskTextFieldWidget> {
+  late String title;
+  TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +45,11 @@ class TaskTextFieldWidget extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
+              onChanged: (value) {
+                title = value;
+              },
               decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 18),
                 filled: true,
                 fillColor: Color(0xffedf3f1),
                 border: OutlineInputBorder(
@@ -38,7 +57,11 @@ class TaskTextFieldWidget extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
                 hintText: 'Add a new task...',
-                hintStyle: TextStyle(color: Color(0xff434947), fontSize: 16),
+                hintStyle: TextStyle(
+                  color: Color(0xff434947),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ),
@@ -50,7 +73,12 @@ class TaskTextFieldWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            onPressed: onAddTask,
+            onPressed: () {
+              final task = TaskModel(title: title, date: DateTime.now());
+              widget.tasks.add(task);
+              widget.updateTasks();
+              controller.clear();
+            },
             icon: const Icon(Icons.add, color: Color(0xff919795), size: 28),
           ),
         ],
