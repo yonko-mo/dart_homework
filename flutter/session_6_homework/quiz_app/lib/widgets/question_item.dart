@@ -1,49 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/models/question_model.dart';
-import 'package:quiz_app/widgets/answer_item.dart';
-import 'package:quiz_app/widgets/question_progress_widget.dart';
+import 'package:quiz_app/theme/text_styles.dart';
+import 'package:quiz_app/widgets/choices_list_view.dart';
+import 'package:quiz_app/widgets/question_header.dart';
 
-class QuestionItem extends StatefulWidget {
-  final List<QuestionsModel> questions;
-  final int currentQuestionIndex;
-  final Function(String, bool) onAnswerSelected; // Added allowMultiple param
+class QuestionItem extends StatelessWidget {
+  const QuestionItem({super.key});
 
-  const QuestionItem({
-    super.key,
-    required this.questions,
-    required this.currentQuestionIndex,
-    required this.onAnswerSelected,
-  });
-
-  @override
-  State<QuestionItem> createState() => _QuestionItemState();
-}
-
-class _QuestionItemState extends State<QuestionItem> {
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = widget.questions[widget.currentQuestionIndex];
-
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        QuestionProgressWidget(
-          questions: widget.questions,
-          currentQuestionIndex: widget.currentQuestionIndex,
-        ),
+        const QuestionHeader(),
         const SizedBox(height: 16),
         Text(
-          currentQuestion.question,
-          style: const TextStyle(color: Colors.white, fontSize: 24),
+          'How would you describe \nyour level of satisfaction \nwith the healthcare \nsystem?',
+          style: AppTextStyles.medium24.copyWith(color: Colors.white),
         ),
-        const SizedBox(height: 16),
-        for (var answer in currentQuestion.answers)
-          AnswerItem(
-            answer: answer.answer,
-            isSelected: currentQuestion.selectedAnswers.contains(answer.answer),
-            onAnswerSelected: () {
-              widget.onAnswerSelected(answer.answer, currentQuestion.allowMultiple);
-            },
-          ),
+        const SizedBox(height: 32),
+        const Expanded(child: ChoicesListView()),
       ],
     );
   }
