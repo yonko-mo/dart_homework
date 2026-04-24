@@ -4,7 +4,8 @@ import 'package:quiz_app/theme/colors.dart';
 import 'package:quiz_app/theme/text_styles.dart';
 
 class QuestionHeader extends StatelessWidget {
-  const QuestionHeader({super.key});
+  final int currentQuestionIndex;
+  const QuestionHeader({super.key, required this.currentQuestionIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,10 @@ class QuestionHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset('assets/images/svgs/question_1.svg'),
+          SvgPicture.asset('assets/images/svgs/question_${currentQuestionIndex + 1}.svg'),
           const SizedBox(width: 8),
           Text(
-            'Question 1',
+            'Question ${currentQuestionIndex + 1}',
             style: AppTextStyles.regular12.copyWith(color: Colors.white),
           ),
         ],

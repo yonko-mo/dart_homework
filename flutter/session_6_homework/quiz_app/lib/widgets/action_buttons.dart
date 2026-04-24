@@ -3,14 +3,21 @@ import 'package:quiz_app/theme/colors.dart';
 import 'package:quiz_app/theme/text_styles.dart';
 
 class ActionButtons extends StatelessWidget {
-  const ActionButtons({super.key});
+  final PageController pageController;
+
+  const ActionButtons({super.key, required this.pageController});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            pageController.previousPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.transparent,
             shape: RoundedRectangleBorder(
@@ -34,7 +41,12 @@ class ActionButtons extends StatelessWidget {
         ),
         const Spacer(),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            pageController.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.secondaryColor,
             shape: RoundedRectangleBorder(
