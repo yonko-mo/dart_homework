@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/question_manager.dart';
 import 'package:quiz_app/models/question_model.dart';
+import 'package:quiz_app/views/results_view.dart';
 import 'package:quiz_app/widgets/action_buttons.dart';
 import 'package:quiz_app/widgets/custom_background_container.dart';
-import 'package:quiz_app/widgets/questions_page_view_builder.dart';
+import 'package:quiz_app/widgets/question_item.dart';
 
 class QuestionsView extends StatefulWidget {
   const QuestionsView({super.key});
@@ -12,7 +14,15 @@ class QuestionsView extends StatefulWidget {
 }
 
 class _QuestionsViewState extends State<QuestionsView> {
-  PageController pageController = PageController();
+  int pageIndex = 0;
+  late QuestionManager questionManager;
+  late final PageController pageController;
+  @override
+  void initState() {
+    pageController = PageController();
+    questionManager = QuestionManager(questions());
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -20,33 +30,6 @@ class _QuestionsViewState extends State<QuestionsView> {
     super.dispose();
   }
 
-  final List<QuestionModel> questions = [
-    QuestionModel(
-      question: 'How many hours of sleep does a healthy adult need per night?',
-      answers: ['7-9 hours', '5-6 hours', '10-12 hours', '4 hours or less'],
-    ),
-    QuestionModel(
-      question:
-          'Which of the following are B vitamins? (Select all that apply)',
-      answers: [
-        'B1 (Thiamine)',
-        'B2 (Riboflavin)',
-        'B3 (Niacin)',
-        'B12 (Cobalamin)',
-      ],
-      allowMultiple: true,
-    ),
-    QuestionModel(
-      question:
-          'How many minutes of moderate exercise per week does WHO recommend?',
-      answers: ['150 minutes', '75 minutes', '200 minutes', '100 minutes'],
-    ),
-    QuestionModel(
-      question:
-          'Which vitamin is produced by the body when exposed to sunlight?',
-      answers: ['Vitamin D', 'Vitamin C', 'Vitamin A', 'Vitamin E'],
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,12 +39,56 @@ class _QuestionsViewState extends State<QuestionsView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              QuestionsPageViewBuilder(
-                questions: questions,
-                pageController: pageController,
+              Expanded(
+                child: PageView.builder(
+                  onPageChanged: (index) {
+                    setState(() {
+                      pageIndex = index;
+                    });
+                  },
+                  controller: pageController,
+                  itemCount: questionManager.questions.length,
+                  itemBuilder: (context, index) {
+                    return QuestionItem(
+                      questionManager: questionManager,
+                      questionIndex: index,
+                    );
+                  },
+                ),
               ),
               ActionButtons(
-                pageController: pageController,
+                isLastQuestion:
+                    pageIndex == questionManager.questions.length - 1,
+                onBack: () {
+                  pageController.previousPage(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeInOut,
+                  );
+                },
+                onNext: () {
+                  if (pageIndex == questionManager.questions.length - 1) {
+                    Navigator.of(context)
+                        .push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ResultsView(questionManager: questionManager),
+                          ),
+                        )
+                        .then((result) {
+                          if (result == true) {
+                            setState(() {
+                              pageIndex = 0;
+                            });
+                            pageController.jumpToPage(0);
+                          }
+                        });
+                  } else {
+                    pageController.nextPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                  }
+                },
               ),
               const SizedBox(height: 33.5),
             ],

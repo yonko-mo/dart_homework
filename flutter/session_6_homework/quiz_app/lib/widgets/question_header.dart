@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quiz_app/models/question_model.dart';
 import 'package:quiz_app/theme/colors.dart';
 import 'package:quiz_app/theme/text_styles.dart';
 
 class QuestionHeader extends StatelessWidget {
-  final int currentQuestionIndex;
-  const QuestionHeader({super.key, required this.currentQuestionIndex});
+  final QuestionModel question;
+  const QuestionHeader({super.key, required this.question});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,10 @@ class QuestionHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset('assets/images/svgs/question_${currentQuestionIndex + 1}.svg'),
+          SvgPicture.asset(question.questionImage),
           const SizedBox(width: 8),
           Text(
-            'Question ${currentQuestionIndex + 1}',
+            "Question ${question.questionNumber}",
             style: AppTextStyles.regular12.copyWith(color: Colors.white),
           ),
         ],

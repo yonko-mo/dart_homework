@@ -10,4 +10,5 @@ abstract final class AppColors {
   static const Color choiceGradientEnd = Color(0xFFC6C2F7);
   static const Color backgroundGradientStart = Color(0xFF060B26);
   static const Color backgroundGradientEnd = Color(0xFF1A1F37);
+  static const Color mainWhite = Colors.white;
 }

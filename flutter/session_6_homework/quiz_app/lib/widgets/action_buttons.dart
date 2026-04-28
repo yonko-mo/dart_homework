@@ -3,21 +3,22 @@ import 'package:quiz_app/theme/colors.dart';
 import 'package:quiz_app/theme/text_styles.dart';
 
 class ActionButtons extends StatelessWidget {
-  final PageController pageController;
-
-  const ActionButtons({super.key, required this.pageController});
+  final VoidCallback onBack;
+  final VoidCallback onNext;
+  final bool isLastQuestion;
+  const ActionButtons({
+    super.key,
+    required this.onBack,
+    required this.onNext,
+    this.isLastQuestion = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         ElevatedButton(
-          onPressed: () {
-            pageController.previousPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          },
+          onPressed: onBack,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.transparent,
             shape: RoundedRectangleBorder(
@@ -41,12 +42,7 @@ class ActionButtons extends StatelessWidget {
         ),
         const Spacer(),
         ElevatedButton(
-          onPressed: () {
-            pageController.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          },
+          onPressed: onNext,
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.secondaryColor,
             shape: RoundedRectangleBorder(
@@ -60,12 +56,12 @@ class ActionButtons extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                'Next',
+                isLastQuestion ? 'Finish' : 'Next',
                 style: AppTextStyles.medium16.copyWith(color: Colors.white),
               ),
               const SizedBox(width: 11),
-              const Icon(
-                Icons.arrow_forward_ios,
+              Icon(
+                isLastQuestion ? Icons.check : Icons.arrow_forward_ios,
                 color: Colors.white,
                 size: 19,
               ),
