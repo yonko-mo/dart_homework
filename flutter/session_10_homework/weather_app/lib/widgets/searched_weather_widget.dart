@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/constants/colors.dart';
+import 'package:weather_app/model/weather_model.dart';
+import 'package:weather_app/utils/weather_theme.dart';
 
 class SearchedWeatherWidget extends StatelessWidget {
-  const SearchedWeatherWidget({super.key});
+  final WeatherModel weatherModel;
+  const SearchedWeatherWidget({super.key, required this.weatherModel});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            AppColors.weatherGradientStart,
-            AppColors.weatherGradientEnd,
-          ],
+      decoration: BoxDecoration(
+        gradient: WeatherTheme.getBackgroundGradient(
+          weatherModel.weatherCondition,
         ),
       ),
       child: Padding(
@@ -22,39 +19,44 @@ class SearchedWeatherWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Chicago',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            Text(
+              weatherModel.cityName,
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
-            const Text('updated at : 22:3', style: TextStyle(fontSize: 24)),
+            Text(
+              'updated at : ${weatherModel.date.split(' ')[1].split(':')[0]}:00',
+              style: const TextStyle(fontSize: 24),
+            ),
             const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.asset(
-                  'assets/images/cloudy.png',
-                  width: 100,
-                  height: 100,
-                ),
-                const Text(
-                  '3',
-                  style: TextStyle(
+                Image.network('https:${weatherModel.image!}'),
+                Text(
+                  '${weatherModel.avgTemp}',
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Column(
+                Column(
                   children: [
-                    Text('maxTemp : 4', style: TextStyle(fontSize: 20)),
-                    Text('minTemp : 0', style: TextStyle(fontSize: 20)),
+                    Text(
+                      'maxTemp : ${weatherModel.maxTemp}',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      'minTemp : ${weatherModel.minTemp}',
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ],
                 ),
               ],
             ),
             const SizedBox(height: 32),
-            const Text(
-              'Heavy Cloudy',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            Text(
+              weatherModel.weatherCondition,
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
           ],
         ),

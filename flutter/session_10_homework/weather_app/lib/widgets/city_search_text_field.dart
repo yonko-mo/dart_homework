@@ -1,6 +1,7 @@
-import 'dart:developer';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/model/weather_model.dart';
+import 'package:weather_app/services/weather_service.dart';
 
 class CitySearchTextField extends StatelessWidget {
   const CitySearchTextField({super.key});
@@ -11,14 +12,15 @@ class CitySearchTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Center(
         child: TextField(
-          onSubmitted: (value) {
-            log(value);
+          onSubmitted: (value) async {
+            WeatherModel weatherModel = await WeatherService(
+              Dio(),
+            ).getCurrentWeather(cityName: value);
+            if (!context.mounted) return;
+            Navigator.pop(context, weatherModel);
           },
           decoration: const InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 30,
-            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 30),
             border: OutlineInputBorder(),
             labelText: 'Search',
             hintText: 'Enter City Name',
