@@ -25,7 +25,8 @@ class _CitySearchTextFieldState extends State<CitySearchTextField> {
             WeatherModel weatherModel = await WeatherService(
               Dio(),
             ).getCurrentWeather(cityName: value);
-            if (!context.mounted) return;
+
+            // ignore: use_build_context_synchronously
             Navigator.pop(context, weatherModel);
           },
           decoration: InputDecoration(

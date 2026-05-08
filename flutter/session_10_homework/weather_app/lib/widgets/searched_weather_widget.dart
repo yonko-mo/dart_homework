@@ -11,55 +11,62 @@ class SearchedWeatherWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: WeatherTheme.getBackgroundGradient(
-          weatherModel.weatherCondition,
+          weatherModel.conditionText,
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              weatherModel.cityName,
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'updated at : ${weatherModel.date.split(' ')[1].split(':')[0]}:00',
-              style: const TextStyle(fontSize: 24),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.network('https:${weatherModel.image!}'),
-                Text(
-                  '${weatherModel.avgTemp}',
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            weatherModel.cityName,
+            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'updated at : ${weatherModel.time}',
+            style: const TextStyle(fontSize: 24),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(width: 24),
+              Image.network(
+                weatherModel.conditionIcon,
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.error),
+              ),
+              const SizedBox(width: 24),
+              Text(
+                '${weatherModel.avgTempC.round()}°C',
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 24),
+              Column(
+                children: [
+                  Text(
+                    'maxTemp : ${weatherModel.maxTempC.round()}°C',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'maxTemp : ${weatherModel.maxTemp}',
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    Text(
-                      'minTemp : ${weatherModel.minTemp}',
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 32),
-            Text(
-              weatherModel.weatherCondition,
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
+                  Text(
+                    'minTemp : ${weatherModel.minTempC.round()}°C',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 32),
+          Text(
+            weatherModel.conditionText,
+            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }

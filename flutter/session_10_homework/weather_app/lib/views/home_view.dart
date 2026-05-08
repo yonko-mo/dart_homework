@@ -19,6 +19,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: buildAppBar(
         title: 'Weather App',
+        weatherModel: weatherModel,
         actions: [
           IconButton(
             onPressed: () async {
@@ -26,11 +27,13 @@ class _HomeViewState extends State<HomeView> {
                 context,
                 MaterialPageRoute(builder: (context) => const SearchView()),
               );
-              if (result != null) {
-                setState(() {
+              setState(() {
+                if (result != null) {
                   weatherModel = result;
-                });
-              }
+                } else {
+                  weatherModel = null;
+                }
+              });
             },
             icon: const Icon(Icons.search),
           ),

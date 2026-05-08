@@ -38,7 +38,7 @@ class WeatherTheme {
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [color.shade300, color.shade50],
+      colors: [color.shade600, color.shade100],
     );
   }
 }

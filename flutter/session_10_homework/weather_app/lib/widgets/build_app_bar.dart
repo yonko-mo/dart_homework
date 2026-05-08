@@ -9,7 +9,7 @@ AppBar buildAppBar({
 }) {
   return AppBar(
     backgroundColor: WeatherTheme.getThemeColor(
-      weatherModel?.weatherCondition,
+      weatherModel?.conditionText,
     ).shade500,
     foregroundColor: Colors.white,
     title: const Text('Weather App'),

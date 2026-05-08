@@ -1,31 +1,39 @@
+import 'location_model.dart';
+import 'current_model.dart';
+import 'forecast_model.dart';
+
 class WeatherModel {
-  final String cityName;
-  final String date;
-  final String? image;
-  final double avgTemp;
-  final double maxTemp;
-  final double minTemp;
-  final String weatherCondition;
+  final LocationModel location;
+  final CurrentModel current;
+  final ForecastModel forecast;
+
   WeatherModel({
-    required this.cityName,
-    required this.date,
-    this.image,
-    required this.avgTemp,
-    required this.maxTemp,
-    required this.minTemp,
-    required this.weatherCondition,
+    required this.location,
+    required this.current,
+    required this.forecast,
   });
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     return WeatherModel(
-      cityName: json['location']['name'],
-      date: json['current']['last_updated'],
-      image: json['forecast']['forecastday'][0]['day']['condition']['icon'],
-      avgTemp: json['forecast']['forecastday'][0]['day']['avgtemp_c'],
-      maxTemp: json['forecast']['forecastday'][0]['day']['maxtemp_c'],
-      minTemp: json['forecast']['forecastday'][0]['day']['mintemp_c'],
-      weatherCondition:
-          json['forecast']['forecastday'][0]['day']['condition']['text'],
+      location: LocationModel.fromJson(json['location']),
+      current: CurrentModel.fromJson(json['current']),
+      forecast: ForecastModel.fromJson(json['forecast']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'location': location.toJson(),
+      'current': current.toJson(),
+      'forecast': forecast.toJson(),
+    };
+  }
+
+  String get cityName => location.name;
+  String get conditionIcon => "https:${forecast.forecastdays.first.day.condition.icon}";
+  String get conditionText => forecast.forecastdays.first.day.condition.text;
+  String get time => current.lastUpdated.split(' ')[1];
+  double get maxTempC => forecast.forecastdays.first.day.maxtempC;
+  double get minTempC => forecast.forecastdays.first.day.mintempC;
+  double get avgTempC => forecast.forecastdays.first.day.avgtempC;
 }
