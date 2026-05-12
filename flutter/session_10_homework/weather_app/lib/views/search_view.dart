@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/widgets/build_app_bar.dart';
+import 'package:weather_app/utils/build_app_bar.dart';
 import 'package:weather_app/widgets/city_search_text_field.dart';
 
 class SearchView extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:weather_app/models/error_model.dart';
 import 'package:weather_app/models/weather_model.dart';
 
@@ -12,10 +11,7 @@ class WeatherService {
 
   WeatherService(this.dio);
 
-  Future<WeatherModel?> getCurrentWeather({
-    required String cityName,
-    BuildContext? context,
-  }) async {
+  Future<WeatherModel> getCurrentWeather({required String cityName}) async {
     try {
       Response response = await dio.get(
         '$baseUrl/forecast.json',
@@ -25,15 +21,7 @@ class WeatherService {
       return weatherModel;
     } on DioException catch (dioError) {
       error = MainException.fromDioException(dioError);
-
-      if (context != null) {
-        ScaffoldMessenger.of(
-          // ignore: use_build_context_synchronously
-          context,
-        ).showSnackBar(SnackBar(content: Text(error?.message ?? 'Error')));
-      }
-
-      return null;
+      throw Exception(error?.message ?? 'Error');
     }
   }
 }

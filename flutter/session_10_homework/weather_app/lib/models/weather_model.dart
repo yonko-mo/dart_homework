@@ -30,9 +30,10 @@ class WeatherModel {
   }
 
   String get cityName => location.name;
-  String get conditionIcon => "https:${forecast.forecastdays.first.day.condition.icon}";
+  String get conditionIcon =>
+      "https:${forecast.forecastdays.first.day.condition.icon}";
   String get conditionText => forecast.forecastdays.first.day.condition.text;
-  String get time => current.lastUpdated.split(' ')[1];
+  DateTime get date => DateTime.parse(current.lastUpdated);
   double get maxTempC => forecast.forecastdays.first.day.maxtempC;
   double get minTempC => forecast.forecastdays.first.day.mintempC;
   double get avgTempC => forecast.forecastdays.first.day.avgtempC;
